@@ -32,16 +32,16 @@ export const RestaurantsScreen = () => (
     <RestaurantListContainer>
       <FlatList
         data={[
-          { name: 1 },
-          { name: 2 },
-          { name: 3 },
-          { name: 4 },
-          { name: 5 },
-          { name: 6 },
-          { name: 7 },
+          { id: 1, name: "Restaurant 1" },
+          { id: 2, name: "Restaurant 2" },
+          { id: 3, name: "Restaurant 3" },
+          { id: 4, name: "Restaurant 4" },
+          { id: 5, name: "Restaurant 5" },
+          { id: 6, name: "Restaurant 6" },
+          { id: 7, name: "Restaurant 7" },
         ]}
-        renderItem={() => <RestaurantInfoCard />} // Added item parameter and fixed renderItem
-        keyExtractor={(item) => item.name}
+        renderItem={({ item }) => <RestaurantInfoCard name={item.name} />}
+        keyExtractor={(item) => item.id.toString()}
         contentContainerStyle={{ padding: 16, marginTop: 16, marginBottom: 16 }}
       />
     </RestaurantListContainer>
