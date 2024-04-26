@@ -14,6 +14,7 @@ export default function App() {
   const [OswaldLoaded] = useOswald({
     Oswald_400Regular,
   });
+
   const [LatoLoaded] = useLato({
     Lato_400Regular,
   });
