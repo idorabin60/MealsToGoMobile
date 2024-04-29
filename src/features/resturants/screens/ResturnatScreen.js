@@ -34,7 +34,7 @@ export const RestaurantsScreen = () => {
       <RestaurantListContainer>
         <FlatList
           data={restaurantContext.resturants}
-          renderItem={() => <RestaurantInfoCard />}
+          renderItem={({ item }) => <RestaurantInfoCard restaurant={item} />}
           keyExtractor={(item) => item.name}
           contentContainerStyle={{
             padding: 16,

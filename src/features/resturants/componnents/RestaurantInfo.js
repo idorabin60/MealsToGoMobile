@@ -61,17 +61,22 @@ export const RestaurantInfoCard = ({ restaurant = {} }) => {
       <Info>
         <Title>{name}</Title>
         <Section>
-          <Rating>
-            {ratingArray.map(() => (
-              <SvgXml xml={star} width={20} height={20} />
-            ))}
-          </Rating>
+          <View style={{ marginTop: 10 }}>
+            {/* Apply marginTop here */}
+            <Rating>
+              {isClosedTemporarily ? (
+                <Text variant="label" style={{ color: "red", marginTop: 50 }}>
+                  CLOSED
+                </Text>
+              ) : (
+                ratingArray.map(() => (
+                  <SvgXml xml={star} width={20} height={20} />
+                ))
+              )}
+            </Rating>
+          </View>
+
           <SectionEnd>
-            {isClosedTemporarily && (
-              <Text variant="label" style={{ color: "red" }}>
-                CLOSED TEMPORARILY
-              </Text>
-            )}
             <Spacer position="left" size="large">
               {isOpenNow && <SvgXml xml={open} width={20} height={20} />}
             </Spacer>
