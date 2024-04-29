@@ -3,6 +3,7 @@
 
 //<AntDesign name="setting" size={24} color="black" />
 import { Feather } from "@expo/vector-icons";
+import styled from "styled-components/native";
 import React from "react";
 import { Text, View } from "react-native";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
@@ -18,6 +19,15 @@ import {
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 import { ResturantContextProvider } from "./src/services/resturantService/resturantContext";
+import { ActivityIndicator, Colors } from "react-native-paper";
+const Loading = styled(ActivityIndicator)`
+  margin-left: -25px;
+`;
+const LoadingContainer = styled.View`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+`;
 export default function App() {
   const [OswaldLoaded] = useOswald({
     Oswald_400Regular,
@@ -26,6 +36,7 @@ export default function App() {
   const [LatoLoaded] = useLato({
     Lato_400Regular,
   });
+
   function HomeScreen() {
     return (
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -36,9 +47,10 @@ export default function App() {
 
   function SettingsScreen() {
     return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Settings!</Text>
-      </View>
+      <LoadingContainer>
+        {console.log("asdalskjd")}
+        <Loading size={50} animating={true} color="#87CEEB" />
+      </LoadingContainer>
     );
   }
   const Tab = createBottomTabNavigator();
@@ -74,9 +86,9 @@ export default function App() {
                   tabBarInactiveTintColor: "gray",
                 })}
               >
+                <Tab.Screen name="Resturants" component={RestaurantsScreen} />
                 <Tab.Screen name="Map" component={HomeScreen} />
                 <Tab.Screen name="Settings" component={SettingsScreen} />
-                <Tab.Screen name="Resturants" component={RestaurantsScreen} />
               </Tab.Navigator>
             </NavigationContainer>
           </ResturantContextProvider>

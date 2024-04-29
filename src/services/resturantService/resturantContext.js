@@ -9,6 +9,7 @@ export const ResturantContextProvider = ({ children }) => {
   const retriveResturants = () => {
     setIsLoading(true);
     setTimeout(() => {
+      console.log("bls");
       restaurantsRequest()
         .then(resturantCamelizeData)
         .then((resturantsData) => {
@@ -19,11 +20,11 @@ export const ResturantContextProvider = ({ children }) => {
           setIsLoading(false);
           setError(err);
         });
-    }, 2000);
+    }, 25000);
   };
   useEffect(() => {
     retriveResturants();
-  });
+  }, []);
   return (
     <ResturantContext.Provider
       value={{ resturants: resturants, isLoading: isLoading, error: error }}
