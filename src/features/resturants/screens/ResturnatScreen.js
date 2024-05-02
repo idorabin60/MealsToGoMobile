@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Searchbar } from "react-native-paper";
 import {
   StatusBar,
@@ -39,8 +39,16 @@ const RestaurantListContainer = styled.View`
 `;
 
 export const RestaurantsScreen = () => {
-  const restaurantContext = useContext(ResturantContext);
+  const [searchQuery, setSearchQuery] = useState("");
+  const updateSearch = (query) => {
+    setSearchQuery(query);
+  };
 
+  const restaurantContext = useContext(ResturantContext);
+  const filteredRestaurants = restaurantContext.resturants.filter(
+    (restaurant) =>
+      restaurant.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
   return (
     <SafeArea>
       {console.log(restaurantContext.isLoading)}
@@ -53,11 +61,15 @@ export const RestaurantsScreen = () => {
       {!restaurantContext.isLoading && (
         <>
           <SearchbarContainer>
-            <Searchbar />
+            <Searchbar
+              placeholder="Search"
+              onChangeText={updateSearch}
+              value={searchQuery}
+            />
           </SearchbarContainer>
           <RestaurantListContainer>
             <FlatList
-              data={restaurantContext.resturants}
+              data={filteredRestaurants}
               renderItem={({ item }) => (
                 <RestaurantInfoCard restaurant={item} />
               )}
